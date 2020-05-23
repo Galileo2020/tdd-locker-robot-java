@@ -43,7 +43,8 @@ public class SmartRobotTest {
     }
 
     @Test
-    void should_store_in_first_locker_and_return_ticket_when_store_bag_given_locker_capacity_are_5_5_and_4_respectively() throws NoAvailableLockerBoxException {
+    void should_store_in_first_locker_and_return_ticket_when_store_bag_given_locker_capacity_are_5_5_and_4_respectively()
+            throws NoAvailableLockerBoxException, NoAvailableLockerException {
         List<Locker> lockers = new ArrayList<>();
         Locker locker1 = new Locker(5);
         Locker locker2 = new Locker(5);

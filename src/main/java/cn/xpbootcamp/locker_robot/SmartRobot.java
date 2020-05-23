@@ -1,6 +1,7 @@
 package cn.xpbootcamp.locker_robot;
 
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerBoxException;
+import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerException;
 import java.util.Comparator;
 import java.util.List;
 
@@ -11,11 +12,13 @@ public class SmartRobot extends Robot {
     }
 
     @Override
-    public Ticket store(Bag bag) throws NoAvailableLockerBoxException {
+    public Ticket store(Bag bag) throws NoAvailableLockerBoxException, NoAvailableLockerException {
         Locker locker = this.lockers.stream().max(Comparator.comparing(Locker::getAvailableCapacity)).get();
-        Ticket ticket = locker.store(bag);
-        if (ticket != null)
+        if (locker.isAvailable()) {
+            Ticket ticket = locker.store(bag);
             this.ticketLockerMap.put(ticket, locker);
-        return ticket;
+            return ticket;
+        }
+        throw new NoAvailableLockerException("No locker available");
     }
 }
