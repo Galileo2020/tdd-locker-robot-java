@@ -60,4 +60,16 @@ public class SmartRobotTest {
         Locker result = smartRobot.getLockerWithTicket(ticket);
         Assertions.assertTrue(result == locker1 || result == locker2);
     }
+
+    @Test
+    void should_warning_no_locker_available_when_store_bag_given_no_available_lockers() {
+        List<Locker> lockers = new ArrayList<>();
+        Locker locker = new Locker(0);
+        lockers.add(locker);
+        SmartRobot smartRobot = new SmartRobot(lockers);
+
+        Bag bag = new Bag();
+
+        Assertions.assertThrows(NoAvailableLockerException.class, () -> smartRobot.store(bag));
+    }
 }
