@@ -90,4 +90,20 @@ public class SmartRobotTest {
 
         Assertions.assertEquals(storedBag,bag);
     }
+
+    @Test
+    void should_return_bag_in_high_capacity_locker_when_get_bag_given_right_ticket() throws NoAvailableLockerBoxException, NoAvailableLockerException, InvalidTicketException {
+        List<Locker> lockers = new ArrayList<>();
+        Locker locker1 = new Locker(4);
+        Locker locker2 = new Locker(6);
+        lockers.add(locker1);
+        lockers.add(locker2);
+        SmartRobot smartRobot = new SmartRobot(lockers);
+        Bag storedBag = new Bag();
+        Ticket ticket = smartRobot.store(storedBag);
+
+        Bag bag = smartRobot.getBagWithTicket(ticket);
+
+        Assertions.assertEquals(storedBag,bag);
+    }
 }
