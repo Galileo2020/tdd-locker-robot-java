@@ -6,12 +6,12 @@ import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerException;
 import java.util.*;
 
 public class Robot {
-    List<Locker> lockers;
+    private List<Locker> lockers = new ArrayList<>();
 
-    Map<Ticket, Locker> ticketLockerMap = new HashMap<>();
+    private Map<Ticket, Locker> ticketLockerMap = new HashMap<>();
 
-    public Robot(ArrayList lockers) {
-        this.lockers = lockers;
+    public Robot(List lockers) {
+        this.lockers.addAll(lockers);
     }
 
     public Ticket store(Bag bag) throws NoAvailableLockerException, NoAvailableLockerBoxException {
@@ -33,5 +33,9 @@ public class Robot {
         } else {
             return locker.takeOut(ticket);
         }
+    }
+
+    Locker getLockerWithTicket(Ticket ticket) {
+        return ticketLockerMap.get(ticket);
     }
 }
