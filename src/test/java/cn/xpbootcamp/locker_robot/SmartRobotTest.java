@@ -1,5 +1,6 @@
 package cn.xpbootcamp.locker_robot;
 
+import cn.xpbootcamp.locker_robot.exception.InvalidTicketException;
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerBoxException;
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerException;
 import java.util.ArrayList;
@@ -72,5 +73,21 @@ public class SmartRobotTest {
         Bag bag = new Bag();
 
         Assertions.assertThrows(NoAvailableLockerException.class, () -> smartRobot.store(bag));
+    }
+
+    @Test
+    void should_return_bag_in_small_capacity_locker_when_get_bag_given_right_ticket() throws NoAvailableLockerBoxException, NoAvailableLockerException, InvalidTicketException {
+        List<Locker> lockers = new ArrayList<>();
+        Locker locker1 = new Locker(5);
+        Locker locker2 = new Locker(5);
+        lockers.add(locker1);
+        lockers.add(locker2);
+        SmartRobot smartRobot = new SmartRobot(lockers);
+        Bag storedBag = new Bag();
+        Ticket ticket = smartRobot.store(storedBag);
+
+        Bag bag = smartRobot.getBagWithTicket(ticket);
+
+        Assertions.assertEquals(storedBag,bag);
     }
 }
