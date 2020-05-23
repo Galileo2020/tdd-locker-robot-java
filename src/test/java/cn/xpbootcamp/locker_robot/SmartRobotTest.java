@@ -106,4 +106,18 @@ public class SmartRobotTest {
 
         Assertions.assertEquals(storedBag,bag);
     }
+
+    @Test
+    void should_not_get_bag_when_get_bag_given_wrong_ticket() throws NoAvailableLockerBoxException, NoAvailableLockerException {
+        List<Locker> lockers = new ArrayList<>();
+        Locker locker = new Locker(1);
+        lockers.add(locker);
+        SmartRobot smartRobot = new SmartRobot(lockers);
+        Bag storedBag = new Bag();
+        Ticket theRightTicket = smartRobot.store(storedBag);
+        Ticket theWrongTicket = new Ticket();
+        Assertions.assertNotEquals(theRightTicket, theWrongTicket);
+
+        Assertions.assertThrows(InvalidTicketException.class, () -> smartRobot.getBagWithTicket(theWrongTicket));
+    }
 }
