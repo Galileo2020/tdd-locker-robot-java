@@ -31,6 +31,7 @@ public class Robot {
         if (locker == null) {
             throw new InvalidTicketException("Invalid Ticket");
         } else {
+            this.ticketLockerMap.remove(ticket);
             return locker.takeOut(ticket);
         }
     }
