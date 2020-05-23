@@ -41,4 +41,23 @@ public class SmartRobotTest {
         Assertions.assertNotNull(ticket);
         Assertions.assertEquals(locker2,smartRobot.getLockerWithTicket(ticket));
     }
+
+    @Test
+    void should_store_in_first_locker_and_return_ticket_when_store_bag_given_locker_capacity_are_5_5_and_4_respectively() throws NoAvailableLockerBoxException {
+        List<Locker> lockers = new ArrayList<>();
+        Locker locker1 = new Locker(5);
+        Locker locker2 = new Locker(5);
+        Locker locker3 = new Locker(4);
+        lockers.add(locker1);
+        lockers.add(locker2);
+        lockers.add(locker3);
+        SmartRobot smartRobot = new SmartRobot(lockers);
+
+        Bag bag = new Bag();
+        Ticket ticket = smartRobot.store(bag);
+
+        Assertions.assertNotNull(ticket);
+        Locker result = smartRobot.getLockerWithTicket(ticket);
+        Assertions.assertTrue(result == locker1 || result == locker2);
+    }
 }
