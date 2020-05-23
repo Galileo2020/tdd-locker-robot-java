@@ -6,9 +6,9 @@ import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerException;
 import java.util.*;
 
 public class Robot {
-    private List<Locker> lockers = new ArrayList<>();
+    List<Locker> lockers = new ArrayList<>();
 
-    private Map<Ticket, Locker> ticketLockerMap = new HashMap<>();
+    Map<Ticket, Locker> ticketLockerMap = new HashMap<>();
 
     public Robot(List lockers) {
         this.lockers.addAll(lockers);

@@ -53,4 +53,8 @@ public class Locker {
     public boolean isAvailable() {
         return boxes.stream().anyMatch(Box::isAvailable);
     }
+
+    public int getAvailableCapacity() {
+        return (int) this.boxes.stream().filter(Box::isAvailable).count();
+    }
 }
