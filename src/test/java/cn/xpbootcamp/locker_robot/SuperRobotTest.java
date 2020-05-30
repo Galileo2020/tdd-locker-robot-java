@@ -11,7 +11,7 @@ import java.util.List;
 public class SuperRobotTest {
 
     @Test
-    void should_store_in_one_of_the_lockers_and_return_ticket_when_store_bag_given_two_lockers_capacity_are_two_respectively() {
+    void should_store_in_one_of_the_lockers_and_return_ticket_when_store_bag_given_two_lockers_capacity_are_two_respectively() throws NoAvailableLockerBoxException, NoAvailableLockerException {
         List<Locker> lockers = new ArrayList<>();
         Locker locker1 = new Locker(2);
         Locker locker2 = new Locker(2);
