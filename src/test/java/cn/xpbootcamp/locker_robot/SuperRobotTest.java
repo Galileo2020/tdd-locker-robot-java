@@ -26,4 +26,27 @@ public class SuperRobotTest {
         Assertions.assertNotNull(ticket);
         Assertions.assertTrue(result == locker1 || result == locker2);
     }
+
+    @Test
+    void two_lockers_vacancy_rate_should_be_fifty_percent_when_store_bag_given_two_lockers_capacity_are_two_respectively_and_one_locker_have_one_bag_in_it()
+            throws NoAvailableLockerBoxException, NoAvailableLockerException {
+        List<Locker> lockers = new ArrayList<>();
+        Locker locker1 = new Locker(2);
+        Locker locker2 = new Locker(2);
+        lockers.add(locker1);
+        lockers.add(locker2);
+        SuperRobot superRobot = new SuperRobot(lockers);
+        Bag bag = new Bag();
+        superRobot.store(bag);
+
+        Bag anotherBag = new Bag();
+        Ticket ticket = superRobot.store(anotherBag);
+
+        System.out.println(locker1.boxes.size()-locker1.keyStore.size());
+        System.out.println(locker2.boxes.size()-locker2.keyStore.size());
+
+        Assertions.assertNotNull(ticket);
+        Assertions.assertEquals(0.5,locker1.getVacancyRate());
+        Assertions.assertEquals(0.5,locker2.getVacancyRate());
+    }
 }
