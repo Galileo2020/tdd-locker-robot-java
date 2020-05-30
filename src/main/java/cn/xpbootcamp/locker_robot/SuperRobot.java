@@ -27,8 +27,12 @@ public class SuperRobot implements Robot{
 
     @Override
     public Bag getBagWithTicket(Ticket ticket) throws InvalidTicketException {
-        return null;
+        Locker locker = ticketLockerMap.get(ticket);
+        if (locker == null) {
+            throw new InvalidTicketException("Invalid Ticket");
+        } else {
+            return locker.takeOut(ticket);
+        }
     }
-
 
 }
