@@ -24,7 +24,7 @@ public class SmartRobotTest {
         Ticket ticket = smartRobot.store(bag);
 
         Assertions.assertNotNull(ticket);
-        Assertions.assertEquals(locker1,smartRobot.getLockerWithTicket(ticket));
+        Assertions.assertEquals(locker1, smartRobot.getLockerWithTicket(ticket));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class SmartRobotTest {
         Ticket ticket = smartRobot.store(bag);
 
         Assertions.assertNotNull(ticket);
-        Assertions.assertEquals(locker2,smartRobot.getLockerWithTicket(ticket));
+        Assertions.assertEquals(locker2, smartRobot.getLockerWithTicket(ticket));
     }
 
     @Test
@@ -88,7 +88,7 @@ public class SmartRobotTest {
 
         Bag bag = smartRobot.getBagWithTicket(ticket);
 
-        Assertions.assertEquals(storedBag,bag);
+        Assertions.assertEquals(storedBag, bag);
     }
 
     @Test
@@ -104,7 +104,7 @@ public class SmartRobotTest {
 
         Bag bag = smartRobot.getBagWithTicket(ticket);
 
-        Assertions.assertEquals(storedBag,bag);
+        Assertions.assertEquals(storedBag, bag);
     }
 
     @Test
