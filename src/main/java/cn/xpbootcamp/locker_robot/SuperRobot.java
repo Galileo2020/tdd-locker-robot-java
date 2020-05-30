@@ -22,7 +22,7 @@ public class SuperRobot implements Robot{
             this.ticketLockerMap.put(ticket, locker);
             return ticket;
         }
-        return null;
+        throw new NoAvailableLockerException("No locker available");
     }
 
     @Override
