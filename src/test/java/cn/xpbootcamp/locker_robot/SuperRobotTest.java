@@ -49,4 +49,16 @@ public class SuperRobotTest {
         Assertions.assertEquals(0.5,locker1.getVacancyRate());
         Assertions.assertEquals(0.5,locker2.getVacancyRate());
     }
+
+    @Test
+    void should_warning_no_locker_available_when_store_bag_given_no_available_lockers() {
+        List<Locker> lockers = new ArrayList<>();
+        Locker locker = new Locker(0);
+        lockers.add(locker);
+        SuperRobot superRobot = new SuperRobot(lockers);
+
+        Bag bag = new Bag();
+
+        Assertions.assertThrows(NoAvailableLockerException.class, () -> superRobot.store(bag));
+    }
 }
