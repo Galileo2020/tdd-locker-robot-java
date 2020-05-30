@@ -1,5 +1,6 @@
 package cn.xpbootcamp.locker_robot;
 
+import cn.xpbootcamp.locker_robot.exception.InvalidTicketException;
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerBoxException;
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerException;
 import org.junit.jupiter.api.Assertions;
@@ -60,5 +61,21 @@ public class SuperRobotTest {
         Bag bag = new Bag();
 
         Assertions.assertThrows(NoAvailableLockerException.class, () -> superRobot.store(bag));
+    }
+
+    @Test
+    void should_return_bag_when_get_bag_given_right_ticket() throws NoAvailableLockerBoxException, NoAvailableLockerException, InvalidTicketException {
+        List<Locker> lockers = new ArrayList<>();
+        Locker locker1 = new Locker(2);
+        Locker locker2 = new Locker(2);
+        lockers.add(locker1);
+        lockers.add(locker2);
+        SuperRobot superRobot = new SuperRobot(lockers);
+        Bag storedBag = new Bag();
+        Ticket ticket = superRobot.store(storedBag);
+
+        Bag bag = superRobot.getBagWithTicket(ticket);
+
+        Assertions.assertEquals(storedBag,bag);
     }
 }
