@@ -2,31 +2,24 @@ package cn.xpbootcamp.locker_robot;
 
 import cn.xpbootcamp.locker_robot.exception.InvalidTicketException;
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerBoxException;
-
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class Locker {
 
-    List<Box> boxes;
-    Map<Ticket, Integer> keyStore;
+    private List<Box> boxes = new ArrayList<>();
+    private Map<Ticket, Integer> keyStore = new HashMap<>();
 
     public Locker(int size) {
-        boxes = new ArrayList<>(Collections.nCopies(size, new Box()));
-        keyStore = new HashMap<>();
+        IntStream.range(0, size).forEach(i -> boxes.add(new Box()));
     }
 
     public Ticket store(Bag bag) throws NoAvailableLockerBoxException {
-        int index = -1;
-        for (int i = 0; i < boxes.size(); i++) {
-            if (boxes.get(i).storeBag(bag)) {
-                index = i;
-                break;
-            }
-        }
+        int index = IntStream.range(0, boxes.size()).filter(i -> boxes.get(i).storeBag(bag)).findFirst().orElse(-1);
+
         if(index != -1){
             return generateTicket(index);
-        }
-        else {
+        } else {
             throw new NoAvailableLockerBoxException("Locker is full");
         }
     }
@@ -58,14 +51,8 @@ public class Locker {
         return (int) this.boxes.stream().filter(Box::isAvailable).count();
     }
 
-    public float getVacancyRate(){
-        float vacancyRate;
-        if(boxes.size() != 0){
-            vacancyRate = (float)(boxes.size()-keyStore.size())/boxes.size();
-        }
-        else {
-            vacancyRate = 0;
-        }
-        return vacancyRate;
+    public double getVacancyRate() {
+        double availableCapacity = getAvailableCapacity();
+        return availableCapacity == 0 ? 0.0 : availableCapacity / boxes.size();
     }
 }

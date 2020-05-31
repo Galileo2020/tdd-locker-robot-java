@@ -22,7 +22,7 @@ public class SuperRobotTest {
 
         Bag bag = new Bag();
         Ticket ticket = superRobot.store(bag);
-        Locker result = superRobot.ticketLockerMap.get(ticket);
+        Locker result = superRobot.getLockerWithTicket(ticket);
 
         Assertions.assertNotNull(ticket);
         Assertions.assertTrue(result == locker1 || result == locker2);
@@ -42,9 +42,6 @@ public class SuperRobotTest {
 
         Bag anotherBag = new Bag();
         Ticket ticket = superRobot.store(anotherBag);
-
-        System.out.println(locker1.boxes.size()-locker1.keyStore.size());
-        System.out.println(locker2.boxes.size()-locker2.keyStore.size());
 
         Assertions.assertNotNull(ticket);
         Assertions.assertEquals(0.5,locker1.getVacancyRate());

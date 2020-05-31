@@ -4,11 +4,12 @@ import cn.xpbootcamp.locker_robot.exception.InvalidTicketException;
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerBoxException;
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerException;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class SuperRobot implements Robot{
-    List<Locker> lockers;
+
+    private List<Locker> lockers;
+    private Map<Ticket, Locker> ticketLockerMap = new HashMap<>();
 
     public SuperRobot(List lockers) {
         this.lockers = lockers;
@@ -35,4 +36,7 @@ public class SuperRobot implements Robot{
         }
     }
 
+    Locker getLockerWithTicket(Ticket ticket) {
+        return ticketLockerMap.get(ticket);
+    }
 }

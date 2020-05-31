@@ -8,7 +8,8 @@ import java.util.*;
 
 public class SmartRobot implements Robot{
 
-    List<Locker> lockers;
+    private List<Locker> lockers;
+    private Map<Ticket, Locker> ticketLockerMap = new HashMap<>();
 
     public SmartRobot(List lockers) {
         this.lockers = lockers;

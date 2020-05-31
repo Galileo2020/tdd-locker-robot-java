@@ -1,7 +1,7 @@
 package cn.xpbootcamp.locker_robot;
 
 public class Box {
-    Bag bag;
+    private Bag bag;
 
     public Bag getBag() {
         return bag;

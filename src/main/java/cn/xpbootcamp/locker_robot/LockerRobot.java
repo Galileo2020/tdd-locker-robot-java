@@ -7,9 +7,10 @@ import java.util.*;
 
 public class LockerRobot implements Robot {
 
-    List<Locker> lockers = new ArrayList<>();
+    private List<Locker> lockers;
+    private Map<Ticket, Locker> ticketLockerMap = new HashMap<>();
 
-    public LockerRobot(List lockers) {
+    public LockerRobot(List<Locker> lockers) {
         this.lockers= lockers;
     }
 
